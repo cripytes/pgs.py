@@ -1,0 +1,49 @@
+import android  
+import time  
+import sys, select, os #for loop exit 
+
+     droid = android .Android () 
+        droid.maketoast("feching GPS ") 
+           #Initiate android-module 
+#notify me  
+            print("leyendo GPS >>>>")
+            droid.startlocating () 
+while True :
+#exit loop hook
+if sys.stdin in select.select([sys.stdin],[],[],0,)[0]:
+  line =input()
+print ("exit endless loop...")
+break 
+
+# wait for location event 
+        event = andriod.eventwaitfor (´location´,10000).result 
+        
+ 
+        
+         if event ["name"] = = "location" : 
+           
+           try:  #try to gps location data 
+           timestamp = repr(event["data"] ["GPS"]["time"])
+           longitud = repr(event["data"]["GPS"]["longitud"]) 
+           latitud =repr(event["data"]["GPS"]["latitud"])
+           altitud =repr("event"["data"]["GPS"]["altitud"])
+           speed =repr("event"["data"]["GPS"]["speed"])
+
+           : lat = str (evento)  ["datos "] ["GPS "] ?["latitud"] 
+        
+                  
+         lgn =str (evento) ["datos"] ["red"] ["longitud"])
+         #if  gps data get nework location instead (inacurrate)
+        Excepto KeyError : 
+        timestamp =repr(event["data"]["network"]["time"])
+        longitud =repr(event["data"]["network"]["longitud"])
+        latitud =repr (event["data"]["network"]["latitud"])
+        altitud =repr (event["data"]["network"]["altitud"])
+        speed = repr(event["data"]["network"]["speep"])
+        accuracy =repr(event["data"]["network"]["accuracy"])
+        loctype = "net"
+        data =locate ";" +timestamp + ";" + longitud + ";" latitud + ";" +altitud + ";" + speed + acurracy 
+         prit (data) #loggoing
+          time.sleep(5) 
+          print("stop GPS sensor...")
+          droid.stopLocateting()
